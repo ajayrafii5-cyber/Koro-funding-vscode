@@ -238,9 +238,9 @@ export default function DashboardPage() {
                 <span className="text-xs text-muted">Akun:</span>
                 <span className="text-sm font-heading font-bold text-teal">{acc.platformLogin}</span>
                 <span className="text-[10px] bg-teal/10 text-teal border border-teal/20 rounded-full px-2 py-0.5 font-semibold">Phase {acc.phase}</span>
-                {data.accounts.length > 1 && <span className="text-muted text-xs ml-1">▾</span>}
+                <span className="text-muted text-xs ml-1">▾</span>
               </button>
-              {showAccDropdown && data.accounts.length > 1 && (
+              {showAccDropdown && (
                 <div className="absolute right-0 top-12 z-50 bg-surface border border-white/10 rounded-xl shadow-2xl min-w-64 overflow-hidden">
                   <p className="text-[10px] text-muted uppercase tracking-widest px-4 py-3 border-b border-white/5 font-semibold">Pilih Akun Trading</p>
                   {data.accounts.map(a => (

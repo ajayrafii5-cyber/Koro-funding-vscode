@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 router.get('/status', async (req, res, next) => {
   try {
     const trader = await prisma.trader.findUnique({
-      where: { id: req.user.id },
+      where: { id: req.trader.id },
       select: { kycStatus: true, kycDocuments: true }
     });
     res.json(trader);

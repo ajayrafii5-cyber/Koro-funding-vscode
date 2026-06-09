@@ -119,13 +119,13 @@ export default function AdminTradersPage() {
                             <div key={a.id} className="flex items-center gap-2">
                               <span className="text-xs text-muted">${Number(a.size).toLocaleString()}</span>
                               <span className="text-xs bg-white/5 px-1.5 py-0.5 rounded text-muted">{phaseLabel(a.phase)}</span>
-                              <span className={`text-xs font-bold $${STATUS_COLORS[a.status] ?? "text-muted"}`}>{a.status}</span>
+                              <span className={`text-xs font-bold ${STATUS_COLORS[a.status] ?? "text-muted"}`}>{a.status}</span>
                             </div>
                           ))}
                         </div>
                       )}
                     </td>
-                    <td className="px-6 py-4 text-muted text-xs">{"{"}t.lastLoginAt ? new Date(t.lastLoginAt).toLocaleDateString('id-ID') : '—'{"}"}</td>
+                    <td className="px-6 py-4 text-muted text-xs">{t.lastLoginAt ? new Date(t.lastLoginAt).toLocaleDateString('id-ID') : '—'}</td>
                     <td className="px-6 py-4">
                       {t.role !== 'ADMIN' ? (
                         <div className="flex items-center gap-2">

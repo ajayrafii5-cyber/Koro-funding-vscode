@@ -6,10 +6,10 @@ const prisma = new PrismaClient();
 router.get('/stats', async (req, res, next) => {
   try {
     const stats = await prisma.affiliateStats.findUnique({
-      where: { traderId: req.user.id }
+      where: { traderId: req.trader.id }
     });
     const trader = await prisma.trader.findUnique({
-      where: { id: req.user.id },
+      where: { id: req.trader.id },
       select: { affiliateRefCode: true }
     });
     res.json({ stats, refCode: trader?.affiliateRefCode });

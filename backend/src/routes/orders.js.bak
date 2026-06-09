@@ -6,13 +6,14 @@ const router = Router();
 const prisma = new PrismaClient();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
+// Harga challenge dalam USD cents (Stripe pakai cents)
 const CHALLENGE_PRICES = {
   CHALLENGE_2STEP: {
-    10000:  14900,
-    25000:  29900,
-    50000:  49900,
-    100000: 89900,
-    200000: 149900,
+    10000:  14900,  // $149
+    25000:  29900,  // $299
+    50000:  49900,  // $499
+    100000: 89900,  // $899
+    200000: 149900, // $1499
   },
   CHALLENGE_1STEP: {
     10000:  19900,
@@ -37,6 +38,7 @@ function getAccountLimits(type, size) {
   return { dailyLossLimit, maxDrawdownLimit, profitTarget };
 }
 
+// POST /api/v1/orders — buat order PENDING + Stripe Checkout Session
 router.post('/', async (req, res, next) => {
   try {
     const traderId = req.trader.id;
@@ -51,19 +53,7 @@ router.post('/', async (req, res, next) => {
       return res.status(400).json({ error: 'Kombinasi tipe dan ukuran akun tidak valid.' });
     }
 
-    // Cek jumlah akun aktif (maks 6)
-    const activeAccounts = await prisma.tradingAccount.count({
-      where: {
-        traderId,
-        status: { in: ['ACTIVE', 'PASSED', 'FUNDED'] },
-      },
-    });
-    if (activeAccounts >= 6) {
-      return res.status(400).json({
-        error: 'Maksimal 6 akun aktif. Salah satu akun harus selesai (breach/expired) sebelum membeli akun baru.',
-      });
-    }
-
+    // Buat order PENDING di DB
     const order = await prisma.order.create({
       data: {
         traderId,
@@ -77,6 +67,7 @@ router.post('/', async (req, res, next) => {
       },
     });
 
+    // Buat Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [{
@@ -94,8 +85,8 @@ router.post('/', async (req, res, next) => {
       success_url: `${process.env.APP_URL}/checkout/success?order_id=${order.id}`,
       cancel_url:  `${process.env.APP_URL}/checkout/cancel?order_id=${order.id}`,
       metadata: {
-        orderId:  order.id,
-        traderId: traderId,
+        orderId:   order.id,
+        traderId:  traderId,
       },
     });
 

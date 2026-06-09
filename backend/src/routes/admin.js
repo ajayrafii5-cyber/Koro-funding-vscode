@@ -116,11 +116,16 @@ router.patch('/orders/:id/approve', async (req, res, next) => {
     if (order.paymentStatus === 'PAID') {
       return res.status(400).json({ error: 'Order sudah diapprove.' });
     }
-    const updated = await prisma.order.update({
-      where: { id: req.params.id },
-      data: { paymentStatus: 'PAID', paidAt: new Date() }
+    const dailyLossLimit   = order.accountSize * 0.05;
+    const maxDrawdownLimit = order.accountSize * 0.10;
+    const profitTarget     = order.challengeType === 'CHALLENGE_1STEP' ? order.accountSize * 0.10 : order.accountSize * 0.08;
+    const platformLogin    = 'KF-' + Math.floor(10000 + Math.random() * 90000);
+    const platformPassword = Math.random().toString(36).slice(2, 10);
+    await prisma.$transaction(async (tx) => {
+      await tx.order.update({ where: { id: order.id }, data: { paymentStatus: 'PAID', paidAt: new Date() } });
+      await tx.tradingAccount.create({ data: { traderId: order.traderId, orderId: order.id, platformLogin, platformPassword, platformServer: 'KoroFunding-Demo', platform: 'MT5', type: order.challengeType, size: order.accountSize, phase: 1, status: 'ACTIVE', balance: order.accountSize, equity: order.accountSize, dailyLossLimit, maxDrawdownLimit, profitTarget, payoutSplit: 80, expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) } });
     });
-    res.json({ message: 'Order berhasil diapprove.', order: updated });
+    res.json({ message: 'Order berhasil diapprove dan akun trading telah dibuat.' });
   } catch (err) { next(err); }
 });
 
