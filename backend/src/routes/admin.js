@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { requireAdmin } from '../middleware/auth.js';
+import { sendEmail } from '../lib/email.js';
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -156,3 +157,40 @@ router.delete('/traders/:id', requireAdmin, async (req, res, next) => {
 });
 
 export default router;
+
+// ─── DEV ONLY: Manual breach trigger untuk testing ───────
+router.post('/test/breach/:accountId', async (req, res, next) => {
+  try {
+    const account = await prisma.tradingAccount.findUnique({
+      where: { id: req.params.accountId },
+      include: { trader: { select: { email: true, fullName: true } } }
+    });
+    if (!account) return res.status(404).json({ error: 'Akun tidak ditemukan' });
+
+    await prisma.tradingAccount.update({
+      where: { id: account.id },
+      data: { status: 'BREACHED', dailyLossUsed: account.dailyLossLimit }
+    });
+
+    await prisma.breachEvent.create({
+      data: {
+        accountId: account.id,
+        type: 'DAILY_LOSS',
+        valueAtBreach: Number(account.dailyLossLimit),
+        limitValue: Number(account.dailyLossLimit),
+      }
+    });
+
+    await sendEmail({
+      to: account.trader.email,
+      template: 'breach_daily',
+      data: {
+        firstName: account.trader.fullName?.split(' ')[0] || 'Trader',
+        accountId: account.platformLogin,
+        limitValue: String(account.dailyLossLimit),
+        valueHit: String(account.dailyLossLimit),
+      }
+    }).catch(console.error);
+    res.json({ success: true, message: `Akun ${account.platformLogin} di-breach` });
+  } catch (err) { next(err); }
+});

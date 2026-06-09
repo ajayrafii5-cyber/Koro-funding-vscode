@@ -23,7 +23,8 @@ import kycRoutes        from './routes/kyc.js';
 import affiliateRoutes  from './routes/affiliate.js';
 import webhookRoutes    from './routes/webhooks.js';
 import adminRoutes      from './routes/admin.js';
-import orderRoutes     from './routes/orders.js';
+import orderRoutes from './routes/orders.js';
+import ctraderRoutes from './routes/ctrader.js';
 
 import { logger }           from './lib/logger.js';
 import { errorHandler }     from './middleware/error.js';
@@ -101,6 +102,7 @@ app.use('/api/v1/affiliate',  authenticateJWT, affiliateRoutes);
 app.use('/api/v1/orders',     authenticateJWT, orderRoutes);
 
 // ─── ADMIN ROUTES ─────────────────────────────────────────
+app.use('/api/v1/ctrader', ctraderRoutes);
 app.use('/api/v1/admin',      authenticateJWT, adminRoutes);
 
 // ─── ERROR HANDLER ────────────────────────────────────────

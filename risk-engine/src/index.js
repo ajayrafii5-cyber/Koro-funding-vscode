@@ -1,3 +1,4 @@
+import 'dotenv/config';
 /**
  * Koro Funding — Risk Management Engine
  * Background service: polls trading platform every 5–30s
@@ -8,7 +9,8 @@
  */
 
 import axios from 'axios';
-import { PrismaClient, AccountStatus, BreachType } from '@prisma/client';
+import pkg from '@prisma/client';
+const { PrismaClient, AccountStatus, BreachType } = pkg;
 import { sendEmail } from './lib/email.js';
 import { disablePlatformAccount } from './lib/platform-api.js';
 import { notifyAdmin } from './lib/slack.js';
