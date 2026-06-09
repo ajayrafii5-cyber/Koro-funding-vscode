@@ -1,0 +1,414 @@
+// Koro Funding — Prisma Database Schema
+// Run: npx prisma migrate dev
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────
+// TRADERS
+// ─────────────────────────────────────────────
+model Trader {
+  id                String   @id @default(uuid())
+  email             String   @unique
+  passwordHash      String
+  fullName          String
+  phone             String?
+  country           String?
+  taxId             String?
+  affiliateRefCode  String?  @unique @default(cuid())
+  referredBy        String?
+
+  role              Role      @default(TRADER)
+  kycStatus         KycStatus @default(PENDING)
+  kycDocuments      KycDocument[]
+
+  twoFactorEnabled  Boolean  @default(false)
+  twoFactorSecret   String?
+
+  accounts          TradingAccount[]
+  payouts           Payout[]
+  affiliateStats    AffiliateStats?
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  lastLoginAt       DateTime?
+
+  @@index([email])
+  @@index([affiliateRefCode])
+}
+
+// ─────────────────────────────────────────────
+// TRADING ACCOUNTS
+// ─────────────────────────────────────────────
+model TradingAccount {
+  id                String          @id @default(uuid())
+  traderId          String
+  trader            Trader          @relation(fields: [traderId], references: [id])
+
+  platformLogin     String          @unique   // MT5/MatchTrader login number
+  platformPassword  String
+  platformServer    String
+  platform          Platform        @default(MT5)
+
+  type              AccountType
+  size              Int             // 10000, 25000, 50000, 100000, 200000
+  phase             Int             @default(1) // 1, 2, or 0 = funded
+
+  status            AccountStatus   @default(ACTIVE)
+
+  // Financial metrics (synced from platform)
+  balance           Decimal         @default(0)
+  equity            Decimal         @default(0)
+  openPnl           Decimal         @default(0)
+  dailyLossUsed     Decimal         @default(0)
+  maxDrawdownUsed   Decimal         @default(0)
+  profitToDate      Decimal         @default(0)
+  tradingDays       Int             @default(0)
+
+  // Limits (set at creation based on type & size)
+  dailyLossLimit    Decimal
+  maxDrawdownLimit  Decimal
+  profitTarget      Decimal
+
+  payoutSplit       Decimal         @default(80) // percentage
+
+  trades            Trade[]
+  payouts           Payout[]
+  breachEvents      BreachEvent[]
+  metricsSnapshots  MetricsSnapshot[]
+
+  orderId           String?
+  order             Order?          @relation(fields: [orderId], references: [id])
+
+  expiresAt         DateTime?
+  passedPhaseAt     DateTime?
+  fundedAt          DateTime?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  @@index([traderId])
+  @@index([status])
+}
+
+// ─────────────────────────────────────────────
+// ORDERS (PURCHASES)
+// ─────────────────────────────────────────────
+model Order {
+  id                String          @id @default(uuid())
+  traderId          String
+  
+  challengeType     AccountType
+  accountSize       Int
+  pricePaid         Decimal
+  currency          String          @default("USD")
+
+  paymentMethod     PaymentMethod
+  paymentProvider   String          // stripe, coinbase, midtrans
+  paymentReference  String?         // provider's transaction ID
+  paymentStatus     PaymentStatus   @default(PENDING)
+
+  promoCode         String?
+  discountAmount    Decimal         @default(0)
+
+  accounts          TradingAccount[]
+
+  webhookEvents     WebhookEvent[]
+
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  paidAt            DateTime?
+
+  @@index([traderId])
+  @@index([paymentStatus])
+}
+
+// ─────────────────────────────────────────────
+// PAYOUTS
+// ─────────────────────────────────────────────
+model Payout {
+  id                String          @id @default(uuid())
+  traderId          String
+  trader            Trader          @relation(fields: [traderId], references: [id])
+  accountId         String
+  account           TradingAccount  @relation(fields: [accountId], references: [id])
+
+  amountGross       Decimal
+  splitPercentage   Decimal
+  amountNet         Decimal
+  fee               Decimal         @default(0)
+
+  method            PayoutMethod
+  bankDetails       Json?           // encrypted bank/wallet details
+
+  status            PayoutStatus    @default(PENDING)
+  rejectionReason   String?
+
+  requestedAt       DateTime        @default(now())
+  processedAt       DateTime?
+  approvedBy        String?         // admin user id
+
+  @@index([traderId])
+  @@index([status])
+}
+
+// ─────────────────────────────────────────────
+// TRADES (synced from platform)
+// ─────────────────────────────────────────────
+model Trade {
+  id                String          @id @default(uuid())
+  accountId         String
+  account           TradingAccount  @relation(fields: [accountId], references: [id])
+
+  platformTicket    String          // MT5 ticket/deal ID
+  symbol            String
+  type              String          // BUY or SELL
+  lots              Decimal
+  openPrice         Decimal
+  closePrice        Decimal?
+  openTime          DateTime
+  closeTime         DateTime?
+  profit            Decimal         @default(0)
+  swap              Decimal         @default(0)
+  commission        Decimal         @default(0)
+  isOpen            Boolean         @default(true)
+
+  flagged           Boolean         @default(false)
+  flagReason        String?
+
+  @@unique([accountId, platformTicket])
+  @@index([accountId])
+  @@index([isOpen])
+}
+
+// ─────────────────────────────────────────────
+// BREACH EVENTS
+// ─────────────────────────────────────────────
+model BreachEvent {
+  id                String          @id @default(uuid())
+  accountId         String
+  account           TradingAccount  @relation(fields: [accountId], references: [id])
+
+  type              BreachType
+  valueAtBreach     Decimal
+  limitValue        Decimal
+  detectedAt        DateTime        @default(now())
+  emailSentAt       DateTime?
+
+  @@index([accountId])
+}
+
+// ─────────────────────────────────────────────
+// METRICS SNAPSHOTS (for charting)
+// ─────────────────────────────────────────────
+model MetricsSnapshot {
+  id                String          @id @default(uuid())
+  accountId         String
+  account           TradingAccount  @relation(fields: [accountId], references: [id])
+
+  balance           Decimal
+  equity            Decimal
+  dailyPnl          Decimal
+  openLots          Decimal
+  snapshotAt        DateTime        @default(now())
+
+  @@index([accountId, snapshotAt])
+}
+
+// ─────────────────────────────────────────────
+// KYC
+// ─────────────────────────────────────────────
+model KycDocument {
+  id                String          @id @default(uuid())
+  traderId          String
+  trader            Trader          @relation(fields: [traderId], references: [id])
+
+  type              KycDocType
+  fileUrl           String          // Cloudflare R2 signed URL
+  fileKey           String          // R2 object key
+  status            KycDocStatus    @default(PENDING)
+  reviewedBy        String?
+  reviewNote        String?
+
+  sumsumApplicantId String?         // Sumsub applicant ID
+
+  uploadedAt        DateTime        @default(now())
+  reviewedAt        DateTime?
+
+  @@index([traderId])
+}
+
+// ─────────────────────────────────────────────
+// AFFILIATE
+// ─────────────────────────────────────────────
+model AffiliateStats {
+  id                String          @id @default(uuid())
+  traderId          String          @unique
+  trader            Trader          @relation(fields: [traderId], references: [id])
+
+  tier              AffiliateTier   @default(BRONZE)
+  totalClicks       Int             @default(0)
+  totalConversions  Int             @default(0)
+  totalEarned       Decimal         @default(0)
+  pendingBalance    Decimal         @default(0)
+  paidBalance       Decimal         @default(0)
+}
+
+model AffiliateConversion {
+  id                String          @id @default(uuid())
+  referrerId        String          // trader.id of the affiliate
+  referredId        String          // trader.id who signed up
+  orderId           String
+
+  commissionRate    Decimal
+  commissionAmount  Decimal
+  status            CommissionStatus @default(PENDING)
+
+  convertedAt       DateTime        @default(now())
+  approvedAt        DateTime?
+  paidAt            DateTime?
+
+  @@index([referrerId])
+}
+
+// ─────────────────────────────────────────────
+// WEBHOOK EVENTS LOG
+// ─────────────────────────────────────────────
+model WebhookEvent {
+  id                String          @id @default(uuid())
+  provider          String          // stripe, coinbase, sumsub
+  eventType         String
+  payload           Json
+  processed         Boolean         @default(false)
+  orderId           String?
+  order             Order?          @relation(fields: [orderId], references: [id])
+  receivedAt        DateTime        @default(now())
+  processedAt       DateTime?
+  error             String?
+
+  @@index([provider, eventType])
+  @@index([processed])
+}
+
+// ─────────────────────────────────────────────
+// ENUMS
+// ─────────────────────────────────────────────
+enum Platform {
+  MT5
+  MT4
+  MATCHTRADER
+  CTRADER
+  DXTRADE
+}
+
+enum AccountType {
+  CHALLENGE_2STEP
+  CHALLENGE_1STEP
+  INSTANT_FUNDING
+  FUNDED
+}
+
+enum AccountStatus {
+  ACTIVE
+  PASSED
+  BREACHED
+  FUNDED
+  EXPIRED
+  SUSPENDED
+}
+
+enum PaymentMethod {
+  CARD
+  CRYPTO
+  BANK_TRANSFER
+  PAYPAL
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum PayoutMethod {
+  BANK_TRANSFER
+  WISE
+  USDT_TRC20
+  USDT_ERC20
+  BTC
+  PAYPAL
+}
+
+enum PayoutStatus {
+  PENDING
+  UNDER_REVIEW
+  PROCESSING
+  PAID
+  REJECTED
+}
+
+enum BreachType {
+  DAILY_LOSS
+  MAX_DRAWDOWN
+  CONSISTENCY_RULE
+  HFT_DETECTED
+  ARBITRAGE_DETECTED
+}
+
+enum KycStatus {
+  PENDING
+  SUBMITTED
+  VERIFIED
+  REJECTED
+}
+
+enum KycDocType {
+  GOVERNMENT_ID
+  PROOF_OF_ADDRESS
+  SELFIE_WITH_ID
+  BANK_STATEMENT
+  TAX_ID
+}
+
+enum KycDocStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum AffiliateTier {
+  BRONZE
+  SILVER
+  GOLD
+  DIAMOND
+}
+
+enum CommissionStatus {
+  PENDING
+  APPROVED
+  PAID
+  REJECTED
+}
+
+model PasswordResetToken {
+  id        String   @id @default(uuid())
+  traderId  String
+  token     String   @unique
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([token])
+  @@index([traderId])
+}
+
+enum Role {
+  TRADER
+  ADMIN
+}

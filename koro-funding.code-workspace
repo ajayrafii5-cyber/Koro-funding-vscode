@@ -1,0 +1,122 @@
+{
+  "folders": [
+    { "name": "🏦 Koro Funding (Root)", "path": "." },
+    { "name": "🌐 Frontend (Next.js)", "path": "frontend" },
+    { "name": "⚙️ Backend (API)", "path": "backend" },
+    { "name": "🔍 Risk Engine", "path": "risk-engine" }
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    "typescript.preferences.quoteStyle": "single",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/dist": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/.next": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "esbenp.prettier-vscode",
+      "bradlc.vscode-tailwindcss",
+      "Prisma.prisma",
+      "ms-vscode.vscode-typescript-next",
+      "dbaeumer.vscode-eslint"
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "🌐 Frontend (Next.js)",
+        "type": "node",
+        "request": "launch",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run", "dev"],
+        "cwd": "${workspaceFolder}/frontend",
+        "console": "integratedTerminal",
+        "serverReadyAction": {
+          "pattern": "started server on .+, url: (https?://.+)",
+          "uriFormat": "%s",
+          "action": "openExternally"
+        }
+      },
+      {
+        "name": "⚙️ Backend API",
+        "type": "node",
+        "request": "launch",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run", "dev"],
+        "cwd": "${workspaceFolder}/backend",
+        "console": "integratedTerminal",
+        "envFile": "${workspaceFolder}/backend/.env"
+      },
+      {
+        "name": "🔍 Risk Engine",
+        "type": "node",
+        "request": "launch",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run", "dev"],
+        "cwd": "${workspaceFolder}/risk-engine",
+        "console": "integratedTerminal",
+        "envFile": "${workspaceFolder}/backend/.env"
+      }
+    ],
+    "compounds": [
+      {
+        "name": "🚀 Run All Services",
+        "configurations": [
+          "🌐 Frontend (Next.js)",
+          "⚙️ Backend API",
+          "🔍 Risk Engine"
+        ],
+        "stopAll": true
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Install All Dependencies",
+        "type": "shell",
+        "command": "cd frontend && npm install && cd ../backend && npm install && cd ../risk-engine && npm install",
+        "group": "build",
+        "presentation": { "panel": "new" }
+      },
+      {
+        "label": "Setup Database (migrate + seed)",
+        "type": "shell",
+        "command": "cd backend && npx prisma migrate dev --name init && node src/lib/seed.js",
+        "group": "build",
+        "presentation": { "panel": "new" }
+      },
+      {
+        "label": "Run Frontend",
+        "type": "shell",
+        "command": "cd frontend && npm run dev",
+        "group": "test",
+        "presentation": { "panel": "new" }
+      },
+      {
+        "label": "Run Backend",
+        "type": "shell",
+        "command": "cd backend && npm run dev",
+        "group": "test",
+        "presentation": { "panel": "new" }
+      },
+      {
+        "label": "Prisma Studio (DB GUI)",
+        "type": "shell",
+        "command": "cd backend && npx prisma studio",
+        "group": "test",
+        "presentation": { "panel": "new" }
+      }
+    ]
+  }
+}
