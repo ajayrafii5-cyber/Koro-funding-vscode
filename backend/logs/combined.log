@@ -922,3 +922,244 @@ Foreign key constraint violated: `Trade_accountId_fkey (index)`
 2026-06-10 01:33:13 [[32minfo[39m]: Login: admin@korofunding.com
 2026-06-10 01:33:13 [[32minfo[39m]: POST /api/v1/admin/test/breach/d00c256c-20f2-4eef-9917-9d7c5a4e6aac
 2026-06-10 01:33:16 [[32minfo[39m]: Email sent: breach_daily → ajayrafii5@gmail.com
+2026-06-11 03:01:41 [[32minfo[39m]: 🚀 Koro Funding API running on http://localhost:4000
+2026-06-11 03:01:41 [[32minfo[39m]: 📊 Health check: http://localhost:4000/health
+2026-06-11 03:01:41 [[32minfo[39m]: 🔌 Socket.io enabled
+2026-06-11 03:01:41 [[32minfo[39m]: 🌍 CORS: http://localhost:3000
+2026-06-11 03:01:57 [[32minfo[39m]: 🚀 Koro Funding API running on http://localhost:4000
+2026-06-11 03:01:57 [[32minfo[39m]: 📊 Health check: http://localhost:4000/health
+2026-06-11 03:01:57 [[32minfo[39m]: 🔌 Socket.io enabled
+2026-06-11 03:01:57 [[32minfo[39m]: 🌍 CORS: http://localhost:3000
+2026-06-11 03:02:24 [[32minfo[39m]: 🚀 Koro Funding API running on http://localhost:4000
+2026-06-11 03:02:24 [[32minfo[39m]: 📊 Health check: http://localhost:4000/health
+2026-06-11 03:02:24 [[32minfo[39m]: 🔌 Socket.io enabled
+2026-06-11 03:02:24 [[32minfo[39m]: 🌍 CORS: http://localhost:3000
+2026-06-11 03:02:45 [[32minfo[39m]: 🚀 Koro Funding API running on http://localhost:4000
+2026-06-11 03:02:45 [[32minfo[39m]: 📊 Health check: http://localhost:4000/health
+2026-06-11 03:02:45 [[32minfo[39m]: 🔌 Socket.io enabled
+2026-06-11 03:02:45 [[32minfo[39m]: 🌍 CORS: http://localhost:3000
+2026-06-11 03:04:39 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:04:39 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:04:50 [[32minfo[39m]: POST /api/v1/auth/login
+2026-06-11 03:04:51 [[32minfo[39m]: Login: ajayrafii5@gmail.com
+2026-06-11 03:04:51 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:04:51 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:04:51 [[32minfo[39m]: GET /api/v1/dashboard/accounts/d00c256c-20f2-4eef-9917-9d7c5a4e6aac/metrics
+2026-06-11 03:04:51 [[32minfo[39m]: GET /api/v1/dashboard/accounts/d00c256c-20f2-4eef-9917-9d7c5a4e6aac/metrics
+2026-06-11 03:05:09 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:05:09 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:05:09 [[32minfo[39m]: GET /api/v1/dashboard/accounts/d00c256c-20f2-4eef-9917-9d7c5a4e6aac/metrics
+2026-06-11 03:05:09 [[32minfo[39m]: GET /api/v1/dashboard/accounts/d00c256c-20f2-4eef-9917-9d7c5a4e6aac/metrics
+2026-06-11 03:05:33 [[32minfo[39m]: POST /api/v1/orders
+2026-06-11 03:10:13 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:10:13 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:10:13 [[32minfo[39m]: GET /api/v1/dashboard/accounts/d00c256c-20f2-4eef-9917-9d7c5a4e6aac/metrics
+2026-06-11 03:10:13 [[32minfo[39m]: GET /api/v1/dashboard/accounts/d00c256c-20f2-4eef-9917-9d7c5a4e6aac/metrics
+2026-06-11 03:10:30 [[32minfo[39m]: POST /api/v1/orders
+2026-06-11 03:10:35 [[32minfo[39m]: POST /api/v1/payments/webhook
+2026-06-11 03:10:35 [[32minfo[39m]: POST /api/v1/payments/webhook
+2026-06-11 03:10:36 [[32minfo[39m]: POST /api/v1/payments/webhook
+2026-06-11 03:10:36 [[32minfo[39m]: POST /api/v1/payments/webhook
+2026-06-11 03:10:38 [[32minfo[39m]: POST /api/v1/payments/webhook
+2026-06-11 03:10:40 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:10:40 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:10:40 [[32minfo[39m]: GET /api/v1/dashboard/accounts/d00c256c-20f2-4eef-9917-9d7c5a4e6aac/metrics
+2026-06-11 03:10:40 [[32minfo[39m]: GET /api/v1/dashboard/accounts/d00c256c-20f2-4eef-9917-9d7c5a4e6aac/metrics
+2026-06-11 03:12:04 [[32minfo[39m]: GET /api/v1/admin/overview
+2026-06-11 03:12:04 [[32minfo[39m]: GET /api/v1/admin/overview
+2026-06-11 03:12:04 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:12:04 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:12:04 [[32minfo[39m]: GET /api/v1/dashboard/accounts/d00c256c-20f2-4eef-9917-9d7c5a4e6aac/metrics
+2026-06-11 03:12:04 [[32minfo[39m]: GET /api/v1/dashboard/accounts/d00c256c-20f2-4eef-9917-9d7c5a4e6aac/metrics
+2026-06-11 03:12:19 [[32minfo[39m]: POST /api/v1/auth/login
+2026-06-11 03:12:19 [[32minfo[39m]: Login: ajayrafii5@gmail.com
+2026-06-11 03:12:19 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:12:19 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:12:19 [[32minfo[39m]: GET /api/v1/dashboard/accounts/d00c256c-20f2-4eef-9917-9d7c5a4e6aac/metrics
+2026-06-11 03:12:19 [[32minfo[39m]: GET /api/v1/dashboard/accounts/d00c256c-20f2-4eef-9917-9d7c5a4e6aac/metrics
+2026-06-11 03:14:57 [[32minfo[39m]: POST /api/v1/auth/login
+2026-06-11 03:14:57 [[32minfo[39m]: Login: admin@korofunding.com
+2026-06-11 03:14:57 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:14:57 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:16:21 [[32minfo[39m]: POST /api/v1/auth/login
+2026-06-11 03:17:45 [[32minfo[39m]: 🚀 Koro Funding API running on http://localhost:4000
+2026-06-11 03:17:45 [[32minfo[39m]: 📊 Health check: http://localhost:4000/health
+2026-06-11 03:17:45 [[32minfo[39m]: 🔌 Socket.io enabled
+2026-06-11 03:17:45 [[32minfo[39m]: 🌍 CORS: http://localhost:3000
+2026-06-11 03:19:49 [[32minfo[39m]: 🚀 Koro Funding API running on http://localhost:4000
+2026-06-11 03:19:49 [[32minfo[39m]: 📊 Health check: http://localhost:4000/health
+2026-06-11 03:19:49 [[32minfo[39m]: 🔌 Socket.io enabled
+2026-06-11 03:19:49 [[32minfo[39m]: 🌍 CORS: http://localhost:3000
+2026-06-11 03:20:04 [[32minfo[39m]: 🚀 Koro Funding API running on http://localhost:4000
+2026-06-11 03:20:04 [[32minfo[39m]: 📊 Health check: http://localhost:4000/health
+2026-06-11 03:20:04 [[32minfo[39m]: 🔌 Socket.io enabled
+2026-06-11 03:20:04 [[32minfo[39m]: 🌍 CORS: http://localhost:3000
+2026-06-11 03:21:00 [[32minfo[39m]: 🚀 Koro Funding API running on http://localhost:4000
+2026-06-11 03:21:00 [[32minfo[39m]: 📊 Health check: http://localhost:4000/health
+2026-06-11 03:21:00 [[32minfo[39m]: 🔌 Socket.io enabled
+2026-06-11 03:21:00 [[32minfo[39m]: 🌍 CORS: http://localhost:3000
+2026-06-11 03:21:15 [[32minfo[39m]: POST /api/v1/auth/login
+2026-06-11 03:21:15 [[32minfo[39m]: Login: admin@korofunding.com
+2026-06-11 03:21:45 [[32minfo[39m]: POST /api/v1/auth/login
+2026-06-11 03:21:59 [[32minfo[39m]: POST /api/v1/auth/login
+2026-06-11 03:21:59 [[32minfo[39m]: Login: admin@korofunding.com
+2026-06-11 03:21:59 [[32minfo[39m]: GET /api/v1/admin/overview
+2026-06-11 03:21:59 [[32minfo[39m]: GET /api/v1/admin/overview
+2026-06-11 03:22:02 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:22:02 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:22:07 [[32minfo[39m]: GET /api/v1/admin/orders
+2026-06-11 03:22:07 [[32minfo[39m]: GET /api/v1/admin/orders
+2026-06-11 03:22:08 [[32minfo[39m]: PATCH /api/v1/admin/orders/c693ea7c-08ed-4a18-9c2c-6f36d43a35a4/approve
+2026-06-11 03:22:08 [[32minfo[39m]: GET /api/v1/admin/orders
+2026-06-11 03:22:10 [[32minfo[39m]: PATCH /api/v1/admin/orders/3f4ea650-a125-4377-8564-279dddedd258/approve
+2026-06-11 03:22:10 [[32minfo[39m]: GET /api/v1/admin/orders
+2026-06-11 03:22:42 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:22:42 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:22:44 [[32minfo[39m]: DELETE /api/v1/admin/traders/2a0bfc2d-2972-4dd5-97f3-0a9fa481f204
+2026-06-11 03:22:44 [[31merror[39m]: 
+Invalid `prisma.tradingAccount.deleteMany()` invocation:
+
+
+Foreign key constraint violated: `BreachEvent_accountId_fkey (index)`
+2026-06-11 03:22:44 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:22:47 [[32minfo[39m]: DELETE /api/v1/admin/traders/2a0bfc2d-2972-4dd5-97f3-0a9fa481f204
+2026-06-11 03:22:47 [[31merror[39m]: 
+Invalid `prisma.tradingAccount.deleteMany()` invocation:
+
+
+Foreign key constraint violated: `BreachEvent_accountId_fkey (index)`
+2026-06-11 03:22:47 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:22:48 [[32minfo[39m]: DELETE /api/v1/admin/traders/8a9bc202-84a9-471e-a1a5-c24df241a578
+2026-06-11 03:22:48 [[31merror[39m]: 
+Invalid `prisma.tradingAccount.deleteMany()` invocation:
+
+
+Foreign key constraint violated: `Trade_accountId_fkey (index)`
+2026-06-11 03:22:48 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:22:53 [[32minfo[39m]: GET /api/v1/admin/overview
+2026-06-11 03:22:53 [[32minfo[39m]: GET /api/v1/admin/overview
+2026-06-11 03:22:54 [[32minfo[39m]: GET /api/v1/admin/orders
+2026-06-11 03:22:54 [[32minfo[39m]: GET /api/v1/admin/orders
+2026-06-11 03:22:54 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:22:54 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:23:00 [[32minfo[39m]: DELETE /api/v1/admin/traders/2a0bfc2d-2972-4dd5-97f3-0a9fa481f204
+2026-06-11 03:23:00 [[31merror[39m]: 
+Invalid `prisma.tradingAccount.deleteMany()` invocation:
+
+
+Foreign key constraint violated: `BreachEvent_accountId_fkey (index)`
+2026-06-11 03:23:00 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:23:33 [[32minfo[39m]: 🚀 Koro Funding API running on http://localhost:4000
+2026-06-11 03:23:33 [[32minfo[39m]: 📊 Health check: http://localhost:4000/health
+2026-06-11 03:23:33 [[32minfo[39m]: 🔌 Socket.io enabled
+2026-06-11 03:23:33 [[32minfo[39m]: 🌍 CORS: http://localhost:3000
+2026-06-11 03:25:23 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:25:23 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:25:28 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:25:28 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:25:51 [[32minfo[39m]: POST /api/v1/auth/register
+2026-06-11 03:25:51 [[32minfo[39m]: New trader registered: ajayrafii5@gmail.com
+2026-06-11 03:26:06 [[32minfo[39m]: POST /api/v1/orders
+2026-06-11 03:26:11 [[32minfo[39m]: POST /api/webhooks/stripe
+2026-06-11 03:26:11 [[32minfo[39m]: POST /api/webhooks/stripe
+2026-06-11 03:26:11 [[32minfo[39m]: POST /api/webhooks/stripe
+2026-06-11 03:26:11 [[32minfo[39m]: POST /api/webhooks/stripe
+2026-06-11 03:26:14 [[32minfo[39m]: POST /api/webhooks/stripe
+2026-06-11 03:26:14 [[32minfo[39m]: Email sent: credentials → ajayrafii5@gmail.com
+2026-06-11 03:26:29 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:26:29 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:26:29 [[32minfo[39m]: GET /api/v1/dashboard/accounts/9b4ee86b-fcb6-4c6f-8a9a-909d8fe5d4f0/metrics
+2026-06-11 03:26:29 [[32minfo[39m]: GET /api/v1/dashboard/accounts/9b4ee86b-fcb6-4c6f-8a9a-909d8fe5d4f0/metrics
+2026-06-11 03:27:53 [[32minfo[39m]: 🚀 Koro Funding API running on http://localhost:4000
+2026-06-11 03:27:53 [[32minfo[39m]: 📊 Health check: http://localhost:4000/health
+2026-06-11 03:27:53 [[32minfo[39m]: 🔌 Socket.io enabled
+2026-06-11 03:27:53 [[32minfo[39m]: 🌍 CORS: http://localhost:3000
+2026-06-11 03:28:18 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:28:18 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:28:18 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:28:18 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:28:18 [[32minfo[39m]: GET /api/v1/dashboard/accounts/9b4ee86b-fcb6-4c6f-8a9a-909d8fe5d4f0/metrics
+2026-06-11 03:28:18 [[32minfo[39m]: GET /api/v1/dashboard/accounts/9b4ee86b-fcb6-4c6f-8a9a-909d8fe5d4f0/metrics
+2026-06-11 03:28:21 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:28:21 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:28:22 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:28:22 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:28:22 [[32minfo[39m]: GET /api/v1/dashboard/accounts/9b4ee86b-fcb6-4c6f-8a9a-909d8fe5d4f0/metrics
+2026-06-11 03:28:22 [[32minfo[39m]: GET /api/v1/dashboard/accounts/9b4ee86b-fcb6-4c6f-8a9a-909d8fe5d4f0/metrics
+2026-06-11 03:28:52 [[32minfo[39m]: POST /api/v1/auth/login
+2026-06-11 03:29:16 [[32minfo[39m]: POST /api/v1/auth/login
+2026-06-11 03:29:16 [[32minfo[39m]: Login: admin@korofunding.com
+2026-06-11 03:29:16 [[32minfo[39m]: GET /api/v1/admin/overview
+2026-06-11 03:29:16 [[32minfo[39m]: GET /api/v1/admin/overview
+2026-06-11 03:29:20 [[32minfo[39m]: GET /api/v1/admin/orders
+2026-06-11 03:29:20 [[32minfo[39m]: GET /api/v1/admin/orders
+2026-06-11 03:29:22 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:29:22 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:29:24 [[32minfo[39m]: DELETE /api/v1/admin/traders/15edb8f1-28cc-4da4-b054-7d278949b1de
+2026-06-11 03:29:24 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:30:52 [[32minfo[39m]: GET /health
+2026-06-11 03:31:27 [[32minfo[39m]: GET /health
+2026-06-11 03:41:05 [[32minfo[39m]: POST /api/v1/auth/login
+2026-06-11 03:41:11 [[32minfo[39m]: POST /api/v1/auth/login
+2026-06-11 03:41:45 [[32minfo[39m]: POST /api/v1/auth/register
+2026-06-11 03:41:46 [[32minfo[39m]: New trader registered: ajayrafii5@gmail.com
+2026-06-11 03:42:05 [[32minfo[39m]: POST /api/v1/orders
+2026-06-11 03:42:12 [[32minfo[39m]: POST /api/webhooks/stripe
+2026-06-11 03:42:12 [[32minfo[39m]: POST /api/webhooks/stripe
+2026-06-11 03:42:12 [[32minfo[39m]: POST /api/webhooks/stripe
+2026-06-11 03:42:12 [[32minfo[39m]: POST /api/webhooks/stripe
+2026-06-11 03:42:15 [[32minfo[39m]: POST /api/webhooks/stripe
+2026-06-11 03:42:15 [[32minfo[39m]: Email sent: credentials → ajayrafii5@gmail.com
+2026-06-11 03:42:16 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:42:16 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:42:16 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
+2026-06-11 03:42:16 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
+2026-06-11 03:42:54 [[32minfo[39m]: POST /api/v1/auth/login
+2026-06-11 03:42:54 [[32minfo[39m]: Login: ajayrafii5@gmail.com
+2026-06-11 03:43:09 [[32minfo[39m]: POST /api/v1/auth/login
+2026-06-11 03:43:09 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:43:24 [[32minfo[39m]: POST /api/v1/auth/login
+2026-06-11 03:44:06 [[32minfo[39m]: POST /api/v1/auth/login
+2026-06-11 03:44:06 [[32minfo[39m]: Login: ajayrafii5@gmail.com
+2026-06-11 03:44:21 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:44:44 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:44:44 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:44:44 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
+2026-06-11 03:44:44 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
+2026-06-11 03:47:58 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:47:58 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:47:58 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
+2026-06-11 03:47:58 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
+2026-06-11 03:48:17 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:48:17 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:48:17 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
+2026-06-11 03:48:17 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
+2026-06-11 03:52:11 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:52:11 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:52:11 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
+2026-06-11 03:52:11 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
+2026-06-11 03:53:06 [[32minfo[39m]: 🚀 Koro Funding API running on http://localhost:4000
+2026-06-11 03:53:06 [[32minfo[39m]: 📊 Health check: http://localhost:4000/health
+2026-06-11 03:53:06 [[32minfo[39m]: 🔌 Socket.io enabled
+2026-06-11 03:53:06 [[32minfo[39m]: 🌍 CORS: http://localhost:3000
+2026-06-11 03:53:21 [[32minfo[39m]: GET /health
+2026-06-11 03:53:53 [[32minfo[39m]: PATCH /api/v1/auth/profile
+2026-06-11 03:54:07 [[32minfo[39m]: PATCH /api/v1/auth/change-password
+2026-06-11 03:55:00 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:55:00 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:55:00 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:55:00 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:55:00 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
+2026-06-11 03:55:00 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
+2026-06-11 03:55:21 [[32minfo[39m]: POST /api/v1/auth/login
+2026-06-11 03:55:21 [[32minfo[39m]: Login: admin@korofunding.com
+2026-06-11 03:55:21 [[32minfo[39m]: GET /api/v1/admin/overview
+2026-06-11 03:55:21 [[32minfo[39m]: GET /api/v1/admin/overview
+2026-06-11 03:55:29 [[32minfo[39m]: GET /api/v1/admin/orders
+2026-06-11 03:55:29 [[32minfo[39m]: GET /api/v1/admin/orders
+2026-06-11 03:55:30 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:55:30 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:55:50 [[32minfo[39m]: GET /api/v1/admin/orders
+2026-06-11 03:55:50 [[32minfo[39m]: GET /api/v1/admin/orders
+2026-06-11 03:55:52 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:55:52 [[32minfo[39m]: GET /api/v1/admin/traders

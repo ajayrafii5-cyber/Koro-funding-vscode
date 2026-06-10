@@ -41,3 +41,23 @@ Invalid `prisma.tradingAccount.deleteMany()` invocation:
 
 
 Foreign key constraint violated: `Trade_accountId_fkey (index)`
+2026-06-11 03:22:44 [[31merror[39m]: 
+Invalid `prisma.tradingAccount.deleteMany()` invocation:
+
+
+Foreign key constraint violated: `BreachEvent_accountId_fkey (index)`
+2026-06-11 03:22:47 [[31merror[39m]: 
+Invalid `prisma.tradingAccount.deleteMany()` invocation:
+
+
+Foreign key constraint violated: `BreachEvent_accountId_fkey (index)`
+2026-06-11 03:22:48 [[31merror[39m]: 
+Invalid `prisma.tradingAccount.deleteMany()` invocation:
+
+
+Foreign key constraint violated: `Trade_accountId_fkey (index)`
+2026-06-11 03:23:00 [[31merror[39m]: 
+Invalid `prisma.tradingAccount.deleteMany()` invocation:
+
+
+Foreign key constraint violated: `BreachEvent_accountId_fkey (index)`

@@ -169,21 +169,6 @@ export default function DashboardPage() {
     fetchAccountDetail(accId, token);
   };
 
-  useEffect(() => {
-    if (!liveEquity) return;
-    const t = setInterval(() => {
-      setLiveEquity(v => {
-        const next = v + Math.round((Math.random() - 0.45) * 80);
-        setChartData(prev => {
-          const last = prev[prev.length - 1];
-          return [...prev.slice(-19), { day: String(Number(last?.day ?? 0) + 1), equity: next }];
-        });
-        return next;
-      });
-    }, 3000);
-    return () => clearInterval(t);
-  }, [liveEquity]);
-
   if (loading) return (
     <div className="flex min-h-screen items-center justify-center bg-bg text-white">
       <div className="text-center">

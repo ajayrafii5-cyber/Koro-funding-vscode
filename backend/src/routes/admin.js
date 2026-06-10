@@ -149,6 +149,9 @@ router.delete('/traders/:id', requireAdmin, async (req, res, next) => {
     const trader = await prisma.trader.findUnique({ where: { id } });
     if (!trader) return res.status(404).json({ error: 'Trader tidak ditemukan' });
     if (trader.role === 'ADMIN') return res.status(403).json({ error: 'Tidak bisa hapus admin' });
+    await prisma.breachEvent.deleteMany({ where: { account: { traderId: id } } });
+    await prisma.metricsSnapshot.deleteMany({ where: { account: { traderId: id } } });
+    await prisma.trade.deleteMany({ where: { account: { traderId: id } } });
     await prisma.tradingAccount.deleteMany({ where: { traderId: id } });
     await prisma.order.deleteMany({ where: { traderId: id } });
     await prisma.trader.delete({ where: { id } });

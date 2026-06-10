@@ -7,6 +7,7 @@ import { PrismaClient } from '@prisma/client';
 import { validate } from '../middleware/validate.js';
 import { registerSchema, loginSchema } from '../lib/validators.js';
 import { logger } from '../lib/logger.js';
+import { authenticateJWT } from '../middleware/auth.js';
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -57,7 +58,7 @@ router.post('/login', validate(loginSchema), async (req, res, next) => {
     const { accessToken, refreshToken } = generateTokens(trader.id);
     logger.info('Login: ' + email);
     return res.json({
-      trader: { id: trader.id, email: trader.email, fullName: trader.fullName, kycStatus: trader.kycStatus },
+      trader: { id: trader.id, email: trader.email, fullName: trader.fullName, kycStatus: trader.kycStatus, role: trader.role },
       accessToken, refreshToken,
     });
   } catch (err) { next(err); }
@@ -144,3 +145,31 @@ function generateTokens(traderId) {
 }
 
 export default router;
+
+// PATCH /api/v1/auth/profile
+router.patch('/profile', authenticateJWT, async (req, res, next) => {
+  try {
+    const { fullName, phone, country } = req.body;
+    if (!fullName) return res.status(400).json({ error: 'Nama wajib diisi.' });
+    const trader = await prisma.trader.update({
+      where: { id: req.trader.id },
+      data: { fullName, phone, country },
+    });
+    return res.json({ message: 'Profil berhasil diupdate.', trader });
+  } catch (err) { next(err); }
+});
+
+// PATCH /api/v1/auth/change-password
+router.patch('/change-password', authenticateJWT, async (req, res, next) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    if (!currentPassword || !newPassword) return res.status(400).json({ error: 'Semua field wajib diisi.' });
+    if (newPassword.length < 8) return res.status(400).json({ error: 'Password minimal 8 karakter.' });
+    const trader = await prisma.trader.findUnique({ where: { id: req.trader.id } });
+    const valid = await bcrypt.compare(currentPassword, trader.passwordHash);
+    if (!valid) return res.status(401).json({ error: 'Password saat ini salah.' });
+    const passwordHash = await bcrypt.hash(newPassword, 10);
+    await prisma.trader.update({ where: { id: req.trader.id }, data: { passwordHash } });
+    return res.json({ message: 'Password berhasil diubah.' });
+  } catch (err) { next(err); }
+});
