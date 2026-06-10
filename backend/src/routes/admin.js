@@ -153,13 +153,14 @@ router.delete('/traders/:id', requireAdmin, async (req, res, next) => {
     await prisma.metricsSnapshot.deleteMany({ where: { account: { traderId: id } } });
     await prisma.trade.deleteMany({ where: { account: { traderId: id } } });
     await prisma.tradingAccount.deleteMany({ where: { traderId: id } });
+    await prisma.affiliateConversion.deleteMany({ where: { OR: [{ referrerId: id }, { referredId: id }] } });
+    await prisma.affiliateStats.deleteMany({ where: { traderId: id } });
     await prisma.order.deleteMany({ where: { traderId: id } });
     await prisma.trader.delete({ where: { id } });
     res.json({ success: true });
   } catch (err) { next(err); }
 });
 
-export default router;
 
 // ─── DEV ONLY: Manual breach trigger untuk testing ───────
 router.post('/test/breach/:accountId', async (req, res, next) => {
@@ -197,3 +198,123 @@ router.post('/test/breach/:accountId', async (req, res, next) => {
     res.json({ success: true, message: `Akun ${account.platformLogin} di-breach` });
   } catch (err) { next(err); }
 });
+
+// ─── PROMO CODE CRUD ─────────────────────────────────────────
+
+// GET /api/v1/admin/promo — list semua promo code
+router.get('/promo', async (req, res, next) => {
+  try {
+    const promos = await prisma.promoCode.findMany({
+      orderBy: { createdAt: 'desc' }
+    });
+    res.json({ promos });
+  } catch (err) { next(err); }
+});
+
+// POST /api/v1/admin/promo — buat promo code baru
+router.post('/promo', async (req, res, next) => {
+  try {
+    const { code, discount, maxUses, validFrom, validUntil, description } = req.body;
+    if (!code || !discount) return res.status(400).json({ error: 'code dan discount wajib diisi.' });
+    if (discount < 1 || discount > 100) return res.status(400).json({ error: 'Diskon harus antara 1-100%.' });
+    const existing = await prisma.promoCode.findUnique({ where: { code: code.toUpperCase() } });
+    if (existing) return res.status(409).json({ error: 'Kode sudah ada.' });
+    const promo = await prisma.promoCode.create({
+      data: {
+        code:        code.toUpperCase(),
+        discount:    Number(discount),
+        maxUses:     maxUses ? Number(maxUses) : null,
+        validFrom:   validFrom ? new Date(validFrom) : new Date(),
+        validUntil:  validUntil ? new Date(validUntil) : null,
+        description: description ?? null,
+        createdBy:   req.trader.id,
+      }
+    });
+    res.status(201).json({ success: true, promo });
+  } catch (err) { next(err); }
+});
+
+// PATCH /api/v1/admin/promo/:id — update promo code
+router.patch('/promo/:id', async (req, res, next) => {
+  try {
+    const { discount, maxUses, validFrom, validUntil, description, isActive } = req.body;
+    const promo = await prisma.promoCode.update({
+      where: { id: req.params.id },
+      data: {
+        ...(discount    !== undefined && { discount: Number(discount) }),
+        ...(maxUses     !== undefined && { maxUses: maxUses ? Number(maxUses) : null }),
+        ...(validFrom   !== undefined && { validFrom: new Date(validFrom) }),
+        ...(validUntil  !== undefined && { validUntil: validUntil ? new Date(validUntil) : null }),
+        ...(description !== undefined && { description }),
+        ...(isActive    !== undefined && { isActive }),
+      }
+    });
+    res.json({ success: true, promo });
+  } catch (err) { next(err); }
+});
+
+// DELETE /api/v1/admin/promo/:id — hapus promo code
+router.delete('/promo/:id', async (req, res, next) => {
+  try {
+    await prisma.promoCode.delete({ where: { id: req.params.id } });
+    res.json({ success: true });
+  } catch (err) { next(err); }
+});
+
+// ─── AFFILIATE COMMISSION MANAGEMENT ─────────────────────────────────────────
+
+// GET /api/v1/admin/affiliate/commissions
+router.get('/affiliate/commissions', async (req, res, next) => {
+  try {
+    const { status } = req.query;
+    const conversions = await prisma.affiliateConversion.findMany({
+      where: status ? { status } : {},
+      orderBy: { convertedAt: 'desc' },
+    });
+    const enriched = await Promise.all(conversions.map(async (c) => {
+      const [referrer, referred, order] = await Promise.all([
+        prisma.trader.findUnique({ where: { id: c.referrerId }, select: { id: true, fullName: true, email: true, affiliateRefCode: true } }),
+        prisma.trader.findUnique({ where: { id: c.referredId }, select: { id: true, fullName: true, email: true } }),
+        prisma.order.findUnique({ where: { id: c.orderId }, select: { id: true, pricePaid: true, accountSize: true, challengeType: true } }),
+      ]);
+      return { ...c, referrer, referred, order };
+    }));
+    res.json({ success: true, data: enriched });
+  } catch (err) { next(err); }
+});
+
+// POST /api/v1/admin/affiliate/commissions/:id/approve
+router.post('/affiliate/commissions/:id/approve', async (req, res, next) => {
+  try {
+    const conversion = await prisma.affiliateConversion.findUnique({ where: { id: req.params.id } });
+    if (!conversion) return res.status(404).json({ error: 'Konversi tidak ditemukan' });
+    if (conversion.status !== 'PENDING') return res.status(400).json({ error: 'Hanya PENDING yang bisa di-approve' });
+    const [updated] = await prisma.$transaction([
+      prisma.affiliateConversion.update({
+        where: { id: req.params.id },
+        data: { status: 'APPROVED', approvedAt: new Date() },
+      }),
+      prisma.affiliateStats.update({
+        where: { traderId: conversion.referrerId },
+        data: { pendingBalance: { increment: conversion.commissionAmount } },
+      }),
+    ]);
+    res.json({ success: true, data: updated });
+  } catch (err) { next(err); }
+});
+
+// POST /api/v1/admin/affiliate/commissions/:id/reject
+router.post('/affiliate/commissions/:id/reject', async (req, res, next) => {
+  try {
+    const conversion = await prisma.affiliateConversion.findUnique({ where: { id: req.params.id } });
+    if (!conversion) return res.status(404).json({ error: 'Konversi tidak ditemukan' });
+    if (conversion.status !== 'PENDING') return res.status(400).json({ error: 'Hanya PENDING yang bisa di-reject' });
+    const updated = await prisma.affiliateConversion.update({
+      where: { id: req.params.id },
+      data: { status: 'REJECTED' },
+    });
+    res.json({ success: true, data: updated });
+  } catch (err) { next(err); }
+});
+
+export default router;

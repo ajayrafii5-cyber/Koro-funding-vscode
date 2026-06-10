@@ -24,7 +24,7 @@ export default function LoginPage() {
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('refreshToken', data.refreshToken);
       localStorage.setItem('trader', JSON.stringify(data.trader));
-      router.push(data.trader?.role === 'ADMIN' ? '/admin' : '/dashboard');
+      const redirect = localStorage.getItem("redirectAfterLogin"); localStorage.removeItem("redirectAfterLogin"); router.push(redirect ?? (data.trader?.role === "ADMIN" ? "/admin" : "/dashboard"));
     } catch {
       setError('Gagal terhubung ke server.');
     }

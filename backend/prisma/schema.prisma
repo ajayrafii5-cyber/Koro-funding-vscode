@@ -246,6 +246,21 @@ model KycDocument {
 // ─────────────────────────────────────────────
 // AFFILIATE
 // ─────────────────────────────────────────────
+model PromoCode {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  discount    Int      // persentase diskon, contoh: 25 = 25%
+  maxUses     Int?     // null = unlimited
+  usedCount   Int      @default(0)
+  validFrom   DateTime @default(now())
+  validUntil  DateTime?
+  isActive    Boolean  @default(true)
+  description String?
+  createdBy   String?  // admin id
+  createdAt   DateTime @default(now())
+  @@index([code])
+}
+
 model AffiliateStats {
   id                String          @id @default(uuid())
   traderId          String          @unique

@@ -23,6 +23,8 @@ import kycRoutes        from './routes/kyc.js';
 import affiliateRoutes  from './routes/affiliate.js';
 import webhookRoutes    from './routes/webhooks.js';
 import adminRoutes      from './routes/admin.js';
+import { PrismaClient } from '@prisma/client';
+const prismaPublic = new PrismaClient();
 import orderRoutes from './routes/orders.js';
 import ctraderRoutes from './routes/ctrader.js';
 
@@ -90,7 +92,21 @@ const loginLimiter = rateLimit({
 // ─── PUBLIC ROUTES ───────────────────────────────────────────
 app.use('/api/v1/auth/login', loginLimiter);
 app.use('/api/v1/auth',       authRoutes);
-app.use('/api/v1/challenges', challengeRoutes);   // challenge catalog (public)
+app.use("/api/v1/challenges", challengeRoutes);
+app.get("/api/v1/affiliate/validate/:code", async (req, res) => {
+  try {
+    const code = req.params.code.toUpperCase();
+    const trader = await prismaPublic.trader.findUnique({ where: { affiliateRefCode: code }, select: { id: true } });
+    if (trader) return res.json({ valid: true, type: "affiliate", discount: 0.25 });
+    const now = new Date();
+    const promo = await prismaPublic.promoCode.findUnique({ where: { code } });
+    if (promo && promo.isActive && (!promo.validUntil || promo.validUntil > now) && promo.validFrom <= now && (promo.maxUses === null || promo.usedCount < promo.maxUses)) {
+      return res.json({ valid: true, type: "promo", discount: promo.discount / 100, description: promo.description });
+    }
+    res.status(404).json({ valid: false, error: "Kode tidak valid" });
+  } catch(e) { res.status(500).json({ valid: false }); }
+});
+app.use("/api/v1/affiliate/validate", affiliateRoutes);
 app.use('/api/webhooks',      webhookRoutes);      // payment & KYC webhooks
 
 // ─── PROTECTED ROUTES ─────────────────────────────────────
@@ -98,7 +114,7 @@ app.use('/api/v1/dashboard',  authenticateJWT, dashboardRoutes);
 app.use('/api/v1/accounts',   authenticateJWT, accountRoutes);
 app.use('/api/v1/payouts',    authenticateJWT, payoutRoutes);
 app.use('/api/v1/kyc',        authenticateJWT, kycRoutes);
-app.use('/api/v1/affiliate',  authenticateJWT, affiliateRoutes);
+app.use("/api/v1/affiliate",  authenticateJWT, affiliateRoutes);
 app.use('/api/v1/orders',     authenticateJWT, orderRoutes);
 
 // ─── ADMIN ROUTES ─────────────────────────────────────────

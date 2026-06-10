@@ -15,6 +15,8 @@ function AdminSidebar() {
     { label: 'Dashboard', icon: '⬡', href: '/admin' },
     { label: 'Orders',    icon: '📋', href: '/admin/orders' },
     { label: 'Traders',   icon: '👥', href: '/admin/traders' },
+    { label: 'Affiliate', icon: '🤝', href: '/admin/affiliate' },
+    { label: 'Promo',     icon: '🏷️',  href: '/admin/promo' },
   ];
   return (
     <aside className="w-60 flex-shrink-0 bg-surface border-r border-white/5 flex flex-col min-h-screen">

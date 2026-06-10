@@ -70,7 +70,9 @@ export default function ChallengePage() {
     { label: 'News Trading',    value: tab === 'instant' ? 'Tidak' : 'Boleh', show: true },
   ].filter(r => r.show);
 
-  const checkoutHref = `/checkout?type=${tab}&size=${selectedSize.replace('$','').replace('K','000')}&label=${encodeURIComponent(label)}&split=${selected.split}&leverage=${selected.leverage}`;
+  const ref = params.get("ref") ?? "";
+  const refParam = ref ? `&refCode=${ref}` : "";
+  const checkoutHref = `/checkout?type=${tab}&size=${selectedSize.replace('$','').replace('K','000')}&label=${encodeURIComponent(label)}&split=${selected.split}&leverage=${selected.leverage}${refParam}`;
 
   return (
     <div className="min-h-screen bg-bg text-white">

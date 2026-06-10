@@ -31,8 +31,13 @@ router.post('/register', validate(registerSchema), async (req, res, next) => {
       const referrer = await prisma.trader.findUnique({ where: { affiliateRefCode: referralCode } });
       if (referrer) referredBy = referrer.id;
     }
+    const firstName = fullName.trim().split(" ")[0].toUpperCase().replace(/[^A-Z]/g, "").slice(0, 3);
+    const randNum = Math.floor(10 + Math.random() * 90);
+    let affiliateRefCode = `${firstName}${randNum}`;
+    const existing2 = await prisma.trader.findUnique({ where: { affiliateRefCode } });
+    if (existing2) affiliateRefCode = `${firstName}${Math.floor(10 + Math.random() * 90)}`;
     const trader = await prisma.trader.create({
-      data: { email, passwordHash, fullName, country, referredBy },
+      data: { email, passwordHash, fullName, country, referredBy, affiliateRefCode },
       select: { id: true, email: true, fullName: true, createdAt: true }
     });
     logger.info('New trader registered: ' + email);

@@ -25,7 +25,7 @@ export default function RegisterPage() {
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('refreshToken', data.refreshToken);
       localStorage.setItem('trader', JSON.stringify(data.trader));
-      router.push('/challenge');
+      const redirect = localStorage.getItem("redirectAfterLogin"); localStorage.removeItem("redirectAfterLogin"); router.push(redirect ?? "/challenge");
     } catch {
       setError('Gagal terhubung ke server.');
     }
