@@ -35,6 +35,7 @@ async function startRiskEngine() {
   setInterval(runMetricsSnapshot, METRICS_POLL_INTERVAL_MS);
   setInterval(runPhaseCheck,    PHASE_CHECK_INTERVAL_MS);
   setInterval(runExpiryCheck,   24 * 60 * 60 * 1000); // daily
+  scheduleDailyReset();
 
   logger.info('✅ Risk Engine running. Intervals: breach=5m, snapshot=30m, phase=15m, expiry=24h');
 }
@@ -451,3 +452,36 @@ startRiskEngine().catch(err => {
   logger.error('Risk engine failed to start:', err);
   process.exit(1);
 });
+
+// ─── DAILY RESET ─────────────────────────────────────────
+async function scheduleDailyReset() {
+  const now = new Date();
+  const midnight = new Date();
+  midnight.setHours(24, 0, 0, 0); // next midnight
+  const msUntilMidnight = midnight - now;
+
+  setTimeout(async () => {
+    await runDailyReset();
+    setInterval(runDailyReset, 24 * 60 * 60 * 1000); // repeat every 24h
+  }, msUntilMidnight);
+
+  logger.info(`⏰ Daily reset scheduled in ${Math.round(msUntilMidnight / 60000)} minutes`);
+}
+
+async function runDailyReset() {
+  try {
+    logger.info('🔄 Running daily loss reset...');
+    const accounts = await prisma.tradingAccount.findMany({
+      where: { status: { in: ['ACTIVE', 'PASSED'] } }
+    });
+    for (const account of accounts) {
+      await prisma.tradingAccount.update({
+        where: { id: account.id },
+        data: { dailyLossUsed: 0 }
+      });
+    }
+    logger.info(`✅ Daily reset done: ${accounts.length} accounts reset`);
+  } catch (err) {
+    logger.error('Daily reset error:', err);
+  }
+}

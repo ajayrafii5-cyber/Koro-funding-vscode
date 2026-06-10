@@ -1163,3 +1163,24 @@ Foreign key constraint violated: `BreachEvent_accountId_fkey (index)`
 2026-06-11 03:55:50 [[32minfo[39m]: GET /api/v1/admin/orders
 2026-06-11 03:55:52 [[32minfo[39m]: GET /api/v1/admin/traders
 2026-06-11 03:55:52 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 03:57:34 [[32minfo[39m]: 🚀 Koro Funding API running on http://localhost:4000
+2026-06-11 03:57:34 [[32minfo[39m]: 📊 Health check: http://localhost:4000/health
+2026-06-11 03:57:34 [[32minfo[39m]: 🔌 Socket.io enabled
+2026-06-11 03:57:34 [[32minfo[39m]: 🌍 CORS: http://localhost:3000
+2026-06-11 03:57:47 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:57:47 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:57:57 [[32minfo[39m]: POST /api/v1/auth/login
+2026-06-11 03:57:58 [[32minfo[39m]: Login: ajayrafii5@gmail.com
+2026-06-11 03:57:58 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:57:58 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:57:58 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
+2026-06-11 03:57:58 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
+2026-06-11 03:58:24 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:58:24 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 03:58:24 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
+2026-06-11 03:58:24 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
+2026-06-11 04:00:35 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 04:00:35 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 04:00:35 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
+2026-06-11 04:00:35 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
+2026-06-11 04:00:42 [[32minfo[39m]: GET /api/v1/dashboard/accounts/20b6e321-0e3b-46bc-842f-f054d25e9918/metrics
