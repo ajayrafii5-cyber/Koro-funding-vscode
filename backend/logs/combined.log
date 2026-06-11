@@ -1770,3 +1770,51 @@ Foreign key constraint violated: `AffiliateStats_traderId_fkey (index)`
 2026-06-11 06:51:16 [[32minfo[39m]: GET /api/v1/admin/traders
 2026-06-11 06:51:18 [[32minfo[39m]: DELETE /api/v1/admin/traders/7265619a-da92-4982-a2de-b06df45b6b91
 2026-06-11 06:51:18 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 06:57:29 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 06:57:29 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 06:57:56 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 06:57:56 [[32minfo[39m]: GET /api/v1/admin/traders
+2026-06-11 06:58:00 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 06:58:00 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 06:58:06 [[32minfo[39m]: GET /api/v1/admin/orders
+2026-06-11 06:58:06 [[32minfo[39m]: GET /api/v1/admin/orders
+2026-06-11 06:58:09 [[32minfo[39m]: GET /api/v1/admin/overview
+2026-06-11 06:58:09 [[32minfo[39m]: GET /api/v1/admin/overview
+2026-06-11 06:58:10 [[32minfo[39m]: GET /api/v1/admin/promo
+2026-06-11 06:58:10 [[32minfo[39m]: GET /api/v1/admin/promo
+2026-06-11 06:58:15 [[32minfo[39m]: DELETE /api/v1/admin/promo/ff5c6f83-7977-43a0-8cda-d175cbdfb626
+2026-06-11 06:58:15 [[32minfo[39m]: GET /api/v1/admin/promo
+2026-06-11 06:58:16 [[32minfo[39m]: GET /api/v1/admin/overview
+2026-06-11 06:58:16 [[32minfo[39m]: GET /api/v1/admin/overview
+2026-06-11 06:58:18 [[32minfo[39m]: GET /api/v1/admin/affiliate/commissions
+2026-06-11 06:58:18 [[32minfo[39m]: GET /api/v1/admin/affiliate/commissions
+2026-06-11 06:59:59 [[32minfo[39m]: GET /api/v1/admin/overview
+2026-06-11 06:59:59 [[32minfo[39m]: GET /api/v1/admin/overview
+2026-06-11 07:02:16 [[32minfo[39m]: POST /api/v1/auth/register
+2026-06-11 07:02:16 [[32minfo[39m]: New trader registered: ajayrafii5@gmail.com
+2026-06-11 07:02:45 [[32minfo[39m]: GET /api/v1/affiliate/validate/eidasha'
+2026-06-11 07:02:50 [[32minfo[39m]: POST /api/v1/orders/create-payment-intent
+2026-06-11 07:02:51 [[32minfo[39m]: POST /api/webhooks/stripe
+2026-06-11 07:03:31 [[32minfo[39m]: POST /api/webhooks/stripe
+2026-06-11 07:03:31 [[32minfo[39m]: POST /api/webhooks/stripe
+2026-06-11 07:03:33 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 07:03:33 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 07:03:33 [[32minfo[39m]: GET /api/v1/dashboard/accounts/b5881705-3e3e-460c-9eef-ffca28dbf17a/metrics
+2026-06-11 07:03:33 [[32minfo[39m]: GET /api/v1/dashboard/accounts/b5881705-3e3e-460c-9eef-ffca28dbf17a/metrics
+2026-06-11 07:03:33 [[32minfo[39m]: POST /api/webhooks/stripe
+2026-06-11 07:03:34 [[32minfo[39m]: Email sent: credentials → ajayrafii5@gmail.com
+2026-06-11 07:03:42 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 07:03:42 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 07:03:42 [[32minfo[39m]: GET /api/v1/dashboard/accounts/b5881705-3e3e-460c-9eef-ffca28dbf17a/metrics
+2026-06-11 07:03:42 [[32minfo[39m]: GET /api/v1/dashboard/accounts/b5881705-3e3e-460c-9eef-ffca28dbf17a/metrics
+2026-06-11 07:05:30 [[32minfo[39m]: PATCH /api/v1/auth/change-password
+2026-06-11 07:05:36 [[32minfo[39m]: POST /api/v1/auth/login
+2026-06-11 07:05:36 [[32minfo[39m]: Login: ajayrafii5@gmail.com
+2026-06-11 07:05:36 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 07:05:36 [[32minfo[39m]: GET /api/v1/dashboard/overview
+2026-06-11 07:05:36 [[32minfo[39m]: GET /api/v1/dashboard/accounts/b5881705-3e3e-460c-9eef-ffca28dbf17a/metrics
+2026-06-11 07:05:36 [[32minfo[39m]: GET /api/v1/dashboard/accounts/b5881705-3e3e-460c-9eef-ffca28dbf17a/metrics
+2026-06-11 07:25:41 [[32minfo[39m]: 🚀 Koro Funding API running on http://localhost:4000
+2026-06-11 07:25:41 [[32minfo[39m]: 📊 Health check: http://localhost:4000/health
+2026-06-11 07:25:41 [[32minfo[39m]: 🔌 Socket.io enabled
+2026-06-11 07:25:41 [[32minfo[39m]: 🌍 CORS: http://localhost:3000
