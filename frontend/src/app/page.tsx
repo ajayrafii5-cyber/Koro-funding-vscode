@@ -7,28 +7,28 @@ const CHALLENGE_DATA = {
   '2step': {
     label: '2-Step Challenge',
     accounts: [
-      { size: '$10K', price: '$89',  p1: '8%', p2: '5%', daily: '5%', dd: '10%', split: '80%', leverage: '1:100' },
-      { size: '$25K', price: '$199', p1: '8%', p2: '5%', daily: '5%', dd: '10%', split: '85%', leverage: '1:100', popular: true },
-      { size: '$50K', price: '$349', p1: '8%', p2: '5%', daily: '5%', dd: '10%', split: '85%', leverage: '1:100' },
+      { size: '$10K', price: '$45',  p1: '8%', p2: '5%', daily: '5%', dd: '10%', split: '80%', leverage: '1:100' },
+      { size: '$25K', price: '$109', p1: '8%', p2: '5%', daily: '5%', dd: '10%', split: '85%', leverage: '1:100', popular: true },
+      { size: '$50K', price: '$179', p1: '8%', p2: '5%', daily: '5%', dd: '10%', split: '85%', leverage: '1:100' },
       { size: '$100K',price: '$599', p1: '8%', p2: '5%', daily: '5%', dd: '10%', split: '90%', leverage: '1:100' },
     ],
   },
   '1step': {
     label: '1-Step Challenge',
     accounts: [
-      { size: '$10K', price: '$129', p1: '10%', daily: '4%', dd: '8%', split: '80%', leverage: '1:50' },
-      { size: '$25K', price: '$279', p1: '10%', daily: '4%', dd: '8%', split: '85%', leverage: '1:50', popular: true },
-      { size: '$50K', price: '$479', p1: '10%', daily: '4%', dd: '8%', split: '85%', leverage: '1:50' },
-      { size: '$100K',price: '$849', p1: '10%', daily: '4%', dd: '8%', split: '90%', leverage: '1:50' },
+      { size: '$10K', price: '$65', p1: '10%', daily: '4%', dd: '8%', split: '80%', leverage: '1:50' },
+      { size: '$25K', price: '$149', p1: '10%', daily: '4%', dd: '8%', split: '85%', leverage: '1:50', popular: true },
+      { size: '$50K', price: '$85', p1: '10%', daily: '4%', dd: '8%', split: '85%', leverage: '1:50' },
+      { size: '$100K',price: '$449', p1: '10%', daily: '4%', dd: '8%', split: '90%', leverage: '1:50' },
     ],
   },
   'instant': {
     label: 'Instant Funding',
     accounts: [
-      { size: '$10K', price: '$249',  p1: 'N/A', daily: '3%', dd: '6%', split: '75%', leverage: '1:30' },
-      { size: '$25K', price: '$549',  p1: 'N/A', daily: '3%', dd: '6%', split: '80%', leverage: '1:30', popular: true },
-      { size: '$50K', price: '$949',  p1: 'N/A', daily: '3%', dd: '6%', split: '85%', leverage: '1:30' },
-      { size: '$100K',price: '$1,699',p1: 'N/A', daily: '3%', dd: '6%', split: '90%', leverage: '1:30' },
+      { size: '$10K', price: '$85',  p1: 'N/A', daily: '3%', dd: '6%', split: '75%', leverage: '1:30' },
+      { size: '$25K', price: '$189',  p1: 'N/A', daily: '3%', dd: '6%', split: '80%', leverage: '1:30', popular: true },
+      { size: '$50K', price: '$319',  p1: 'N/A', daily: '3%', dd: '6%', split: '85%', leverage: '1:30' },
+      { size: '$100K',price: '$579',p1: 'N/A', daily: '3%', dd: '6%', split: '90%', leverage: '1:30' },
     ],
   },
 } as const;
